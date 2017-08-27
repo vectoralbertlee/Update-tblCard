@@ -45,9 +45,18 @@ namespace Update_tblCard
                         command.Parameters.AddWithValue("@cardHexValue", cardHexValue);
                         conn.Open();
 
-                        string getValue = command.ExecuteScalar().ToString();
+                        object obj = command.ExecuteScalar();
+                        if (obj != null)
+                        {
+                            Console.WriteLine(String.Format("Antipassback = {0}", obj.ToString()));
+                        }
+                        else
+                        {
+                            Console.WriteLine("Card Not Found");
+                        }
+                       
 
-                        Console.WriteLine(String.Format("Antipassback = {0}", getValue));
+                        
                         
                     }
                 } else if (inputKey.Contains("2"))
